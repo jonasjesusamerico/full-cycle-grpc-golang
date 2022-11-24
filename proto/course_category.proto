@@ -4,6 +4,9 @@ package pb;
 // Indica onde será criado a pasta
 option go_package = "internal/pb";
 
+// É necessario sempre mandar pelo menos uma mensage mem branco na reposta
+message blank{}
+
 message Category {
     string id = 1; // Variaveis iniciada indica apenas a ordem dos campos
     string name = 2;
@@ -30,6 +33,6 @@ service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
     rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
     rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
-    // rpc ListCategories(blank) returns (CategoryList) {}
+    rpc ListCategories(blank) returns (CategoryList) {}
     // rpc GetCategory(CategoryGetRequest) returns (Category) {}
 }
