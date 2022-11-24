@@ -28,11 +28,16 @@ message CategoryResponse {
     Category category  = 1;
 }
 
+// Utilizado para pesquisar a categoria pelo id
+message CategoryGetRequest {
+    string id = 1;
+}
+
 // Seria mais ou menos os serviços do crud responsavel pelas operação das categoria
 service CategoryService {
     rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
     rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
     rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
     rpc ListCategories(blank) returns (CategoryList) {}
-    // rpc GetCategory(CategoryGetRequest) returns (Category) {}
+    rpc GetCategory(CategoryGetRequest) returns (Category) {}
 }
