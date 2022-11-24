@@ -1,0 +1,35 @@
+syntax = "proto3";
+package pb;
+
+// Indica onde será criado a pasta
+option go_package = "internal/pb";
+
+message Category {
+    string id = 1; // Variaveis iniciada indica apenas a ordem dos campos
+    string name = 2;
+    string description = 3;
+}
+
+// Utilizado para cria a categoria
+message CreateCategoryRequest {
+    string name = 1;
+    string description = 2;
+}
+
+message CategoryList {
+    repeated Category categories = 1;
+}
+
+// Utilizado para retornar o resultado de uma categoria
+message CategoryResponse {
+    Category category  = 1;
+}
+
+// Seria mais ou menos os serviços do crud responsavel pelas operação das categoria
+service CategoryService {
+    rpc CreateCategory(CreateCategoryRequest) returns (Category) {}
+    rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
+    rpc CreateCategoryStreamBidirectional(stream CreateCategoryRequest) returns (stream Category) {}
+    // rpc ListCategories(blank) returns (CategoryList) {}
+    // rpc GetCategory(CategoryGetRequest) returns (Category) {}
+}
